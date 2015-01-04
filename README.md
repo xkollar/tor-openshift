@@ -36,3 +36,13 @@ When using with your own cartridge make sure that your application
 use variables in form `*_PORT` and `*_IP` or `*_ADDRESS` so this
 cartridge will know where to forward requests. For example `diy`
 cartridge uses `OPENSHIFT_DIY_IP` and `OPENSHIFT_DIY_PORT`.
+
+Note
+----
+
+There is more to Hidden services. Before doing anything,
+you should probably educate yourself a little. Good starting points:
+
+* https://www.torproject.org/docs/hidden-services.html.en
+* https://www.torproject.org/docs/tor-hidden-service.html.en
+* https://blog.torproject.org/blog/hidden-services-need-some-love
