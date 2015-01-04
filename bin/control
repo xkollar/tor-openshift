@@ -2,8 +2,9 @@
 
 source "${OPENSHIFT_OCAML_CORE_DIR}usr/src/common.sh"
 
-declare pidfile="${OPENSHIFT_DATA_DIR}server.pid"
-declare logfile="${OPENSHIFT_DATA_DIR}server.log"
+declare pidfile="${OPENSHIFT_DATA_DIR}tor.pid"
+declare logfile="${OPENSHIFT_LOG_DIR}tor.log"
+declare install_log="${OPENSHIFT_LOG_DIR}tor.install.log"
 
 function usage() {
     echo "Usage: ${progname} [start|stop|restart|status|*]"
@@ -20,8 +21,8 @@ function start() {
         warning "The server is already running."
     else
         "${OPENSHIFT_TOR_DIR}bin/build-and-run-tor" \
-        &> "${OPENSHIFT_LOG_DIR}tor.install.log" &
-        echo $! > "${pidfile}"
+        &> "${install_log}" &
+        echo $! &>> "${pidfile}"
     fi
 }
 
@@ -47,8 +48,9 @@ function restart() {
 }
 
 function tidy() {
-    client_message "Deleting Tor log"
+    client_message "Deleting Tor logs"
     rm -rf "${logfile}"
+    rm -rf "${install_log}"
 }
 
 function ignore_hook() {

@@ -25,6 +25,8 @@ if ! type -a tor &>/dev/null; then
         make install
     cd -
 
+    rm -rf $tmp
+
     mkdir -p "${OPENSHIFT_TOR_DIR}tor/hidden_service"
 fi
 
