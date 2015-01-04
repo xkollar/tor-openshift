@@ -1,0 +1,16 @@
+# Disable proxy, we use only hidden service
+SocksPort 0
+
+# Log notice file <%= ENV['OPENSHIFT_LOG_DIR'] %>tor.log
+RunAsDaemon 1
+DataDirectory <%= ENV['OPENSHIFT_DATA_DIR'] %>tor
+PidFile <%= ENV['OPENSHIFT_DATA_DIR'] %>tor.pid
+
+## Have as many as you wish, though one is usually reasonable...
+
+HiddenServiceDir <%= ENV['OPENSHIFT_TOR_DIR'] %>tor/hidden_service/
+HiddenServicePort 80 <%=
+ENV.select { |key, value| key.match /_(ADDRESS|IP)$/ }.first.last rescue "0.0.0.0"
+%>:<%=
+ENV.select { |key, value| key.match /_(PORT)$/ }.first.last rescue "8080"
+%>

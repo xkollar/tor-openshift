@@ -1,0 +1,20 @@
+Name: tor
+Cartridge-Short-Name: TOR
+Cartridge-Version: "0.0.1"
+Cartridge-Vendor: mkollar
+Version: "0.2.5.10"
+Versions:
+  - "0.2.5.10"
+License: "Tor's License"
+License-Url: https://gitweb.torproject.org/tor.git/plain/LICENSE
+Categories:
+  - embedded
+  - tor
+Provides:
+  - "tor - 0.2.5.10"
+  - "tor"
+Scaling:
+  Min: 1
+  Max: -1
+Source-Url: https://github.com/xkollar/tor-openshift/archive/master.zip
+

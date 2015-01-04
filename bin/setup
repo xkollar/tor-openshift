@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+
+source "${OPENSHIFT_TOR_DIR}usr/src/common.sh"
+
+set -eu
+
+declare version="0.2.5.10"
+declare progname=$( basename "${0}" )
+
+function usage() {
+    echo "Usage: ${progname} [--version VERSION(default:${version})]"
+}
+
+function generate_privkey_and_hostname() {
+    local dir=$1
+    mkdir -p "${dir}"
+    local private_key="${dir}/private_key"
+    if ! [ -f "${private_key}" ]; then
+        openssl genrsa -out "${private_key}" 1024 &>/dev/null
+    fi
+    local hostname_file=$"${dir}/hostname"
+    if ! [ -f "${hostname_file}" ]; then
+        openssl rsa -in "${private_key}" -pubout -outform DER \
+        2>/dev/null \
+        | python -c 'import sys, hashlib, base64;
+print base64.b32encode(hashlib.sha1(sys.stdin.read()[22:]).digest()[:10]).lower()' \
+        > "${hostname_file}"
+        sed -i 's/$/.onion/' "${hostname_file}"
+    fi
+    cat "${hostname_file}"
+}
+
+function parseopts() {
+    if [ $# -gt 2 ]; then
+        usage >&2
+        exit 1
+    fi
+
+    local OPTS=$( getopt -n "${progname}" -o h -l version: -- "$@" )
+
+    if [ $? -ne 0 ]; then
+        usage >&2
+        exit 1
+    fi
+
+    eval set -- "${OPTS}"
+
+    while true; do
+        case "${1}" in
+            -h) usage; exit 0;;
+            --version) version="${2}"; shift 2;;
+            --) shift; break;;
+        esac
+    done
+}
+
+function main() {
+    parseopts
+
+    set_env_var TOR_VERSION "${version}" "${OPENSHIFT_TOR_DIR}env"
+
+    local hostname=$( generate_privkey_and_hostname "${OPENSHIFT_TOR_DIR}tor/hidden_service" )
+    client_result "Environment set to use Tor ${version}."
+    client_result "Once running, you will be able to locate it at $hostname"
+}
+
+main "$@"

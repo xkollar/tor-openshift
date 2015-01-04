@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+
+source "${OPENSHIFT_OCAML_CORE_DIR}usr/src/common.sh"
+
+declare pidfile="${OPENSHIFT_DATA_DIR}server.pid"
+declare logfile="${OPENSHIFT_DATA_DIR}server.log"
+
+function usage() {
+    echo "Usage: ${progname} [start|stop|restart|status|*]"
+}
+
+function pid() {
+    local pid=$( cat "${pidfile}" )
+    echo "${pid}"
+    test -n "${pid}" && kill -0 "${pid}" &>/dev/null
+}
+
+function start() {
+    if pid &>/dev/null; then
+        warning "The server is already running."
+    else
+        "${OPENSHIFT_TOR_DIR}bin/build-and-run-tor" \
+        &> "${OPENSHIFT_LOG_DIR}tor.install.log" &
+        echo $! > "${pidfile}"
+    fi
+}
+
+function stop {
+    if pid=$( pid ); then
+        kill "${pid}"
+        wait_for_stop "${pid}"
+        if pid &>/dev/null; then
+            error "The server did not respond to the stop signal." 1
+        fi
+    else
+        warning "The server is not running, nothing to stop."
+    fi
+}
+
+function status() {
+    pid
+}
+
+function restart() {
+    stop
+    start
+}
+
+function tidy() {
+    client_message "Deleting Tor log"
+    rm -rf "${logfile}"
+}
+
+function ignore_hook() {
+    echo "Skipping unused hook ${1}"
+}
+
+if [ $# -ne 1 ]; then
+    usage >&2
+    exit 1
+fi
+
+# Handle commands.
+case "${1}" in
+    start|stop|restart|status|tidy)
+        "${1}";;
+    *) ignore_hook "${1}";;
+esac

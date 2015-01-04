@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+if ! type -a tor &>/dev/null; then
+
+    SRC_URL="https://www.torproject.org/dist/tor-${TOR_VERSION}.tar.gz"
+    SIG_URL="${SRC_URL}.asc"
+
+    tmp=$( mktemp -d )
+
+    SRC="${tmp}/$( basename "${SRC_URL}" )"
+    SIG="${tmp}/$( basename "${SIG_URL}" )"
+
+    wget -c -O "${SRC}" "${SRC_URL}"
+    wget -c -O "${SIG}" "${SIG_URL}"
+
+    if ! HOME="${OPENSHIFT_REPO_DIR}" gpg --verify "${SIG}"; then
+        error "Signature does not match!" 1
+    fi
+
+    cd $tmp
+        tar xvzf "${SRC}"
+        cd "tor-${TOR_VERSION}"
+        ./configure --prefix "${OPENSHIFT_TOR_DIR}tor"
+        make
+        make install
+    cd -
+
+    mkdir -p "${OPENSHIFT_TOR_DIR}tor/hidden_service"
+fi
+
+tor
