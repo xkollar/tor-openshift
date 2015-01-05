@@ -13,9 +13,11 @@ To save you of long preambles, let us just dive into example where
 we will create hidden service for `diy`-based application:
 
 ~~~~ .bash
-appname=test
-rhc app create $appname --no-git diy
-rhc cartridge add --app $appname 'https://raw.githubusercontent.com/xkollar/tor-openshift/master/metadata/manifest.yml'
+appname=hidden
+rhc app create "${appname}" --no-git \
+    diy \
+    'https://raw.githubusercontent.com/xkollar/tor-openshift/master/metadata/manifest.yml' \
+    --from-code 'https://github.com/xkollar/openshiftor-example.git'
 ~~~~
 
 And that is all... you just have to wait till Tor builds and starts for
@@ -48,3 +50,4 @@ you should probably educate yourself a little. Good starting points:
 * https://www.torproject.org/docs/hidden-services.html.en
 * https://www.torproject.org/docs/tor-hidden-service.html.en
 * https://blog.torproject.org/blog/hidden-services-need-some-love
+appname=hidden
