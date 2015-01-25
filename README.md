@@ -33,6 +33,8 @@ If you want to check whether you was successful but you do not want
 to install Tor yourselves, you can use some Tor gateway, e.g.
 [tor2web.org](https://www.tor2web.org/).
 
+![Screenshot](screenshot.png)
+
 Integration notes
 -----------------
 
