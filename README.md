@@ -2,7 +2,7 @@ OpenShifTor
 ===========
 
 Tor cartridge for OpenShift. Make your application accessible
-via Tor! (You will get cool .onion address.)
+as a Tor Hidden Service! (You will get cool `.onion` address.)
 
 ![Logo](OpenShifTor.png)
 
@@ -64,7 +64,9 @@ you should probably educate yourself a little. Good starting points:
 * https://blog.torproject.org/blog/hidden-services-need-some-love
 
 Also, when you want to run this gear at servers that are
-not yours, be sure to read their terms and conditions, e.g.
+not yours, be sure to read terms and conditions of host, e.g.
 [https://www.openshift.com/legal](https://www.openshift.com/legal).
-This cartridge is inteded to provide possibility to access your applicateion
-via `.onion` hosname, not to hide anything bad.
+This cartridge is intended to provide possibility to access your application
+via `.onion` hostname, not to hide anything bad. Also by running
+this service on machine that you are not the only one
+to manage, you may expose your users to unpredictable dangers.
