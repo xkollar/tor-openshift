@@ -27,6 +27,13 @@ function start() {
 }
 
 function stop {
+    local marker="keep_tor_running"
+    if marker_present "${marker}"; then
+        echo "Not stopping Tor as marker '${marker}' is present."
+        return 0
+    else
+        echo "You can prevent Tor from stopping by creating marker '${marker}'."
+    fi
     if pid=$( pid ); then
         kill "${pid}"
         wait_for_stop "${pid}"
@@ -43,9 +50,6 @@ function status() {
 }
 
 function restart() {
-    if ! marker_present really_restart_tor; then
-        return 0
-    fi
     stop
     start
 }
