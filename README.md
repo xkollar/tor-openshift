@@ -66,5 +66,5 @@ you should probably educate yourself a little. Good starting points:
 Also, when you want to run this gear at servers that are
 not yours, be sure to read their terms and conditions, e.g.
 [https://www.openshift.com/legal](https://www.openshift.com/legal).
-This cartridge is inteded to provided possibility to access your gear
+This cartridge is inteded to provide possibility to access your applicateion
 via `.onion` hosname, not to hide anything bad.
