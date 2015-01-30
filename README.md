@@ -43,6 +43,16 @@ use variables in form `*_PORT` and `*_IP` or `*_ADDRESS` so this
 cartridge will know where to forward requests. For example `diy`
 cartridge uses `OPENSHIFT_DIY_IP` and `OPENSHIFT_DIY_PORT`.
 
+To prevent Tor from restarting (that causes .hidden site inavailability
+for some time) use `keep_tor_running` marker.
+
+~~~~ .bash
+touch .openshift/markers/keep_tor_running
+git add .openshift/markers/keep_tor_running
+git commit -m 'Keep Tor running'
+git push
+~~~~
+
 Note
 ----
 
