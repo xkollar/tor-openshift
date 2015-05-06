@@ -1,10 +1,11 @@
 Name: tor
 Cartridge-Short-Name: TOR
-Cartridge-Version: "0.0.1"
+Cartridge-Version: "0.0.2"
 Cartridge-Vendor: mkollar
-Version: "0.2.5.10"
+Version: "0.2.5.12"
 Versions:
   - "0.2.5.10"
+  - "0.2.5.12"
 License: "Tor's License"
 License-Url: https://gitweb.torproject.org/tor.git/plain/LICENSE
 Categories:
@@ -12,6 +13,7 @@ Categories:
   - tor
 Provides:
   - "tor - 0.2.5.10"
+  - "tor - 0.2.5.12"
   - "tor"
 Scaling:
   Min: 1
