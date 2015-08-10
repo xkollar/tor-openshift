@@ -1,24 +1,28 @@
-Name: tor
 Cartridge-Short-Name: TOR
-Cartridge-Version: "0.0.3"
-Cartridge-Vendor: mkollar
-Version: "0.2.6.8"
-Versions:
-  - "0.2.5.10"
-  - "0.2.5.12"
-  - "0.2.6.8"
-License: "Tor's License"
-License-Url: https://gitweb.torproject.org/tor.git/plain/LICENSE
-Categories:
-  - embedded
-  - tor
-Provides:
-  - "tor - 0.2.5.10"
-  - "tor - 0.2.5.12"
-  - "tor - 0.2.6.8"
-  - "tor"
+Name: tor
+Version: '0.2.6.10'
 Scaling:
   Min: 1
   Max: -1
+Cartridge-Vendor: mkollar
+Provides:
+- tor - 0.2.4.26
+- tor - 0.2.4.27
+- tor - 0.2.5.11
+- tor - 0.2.5.12
+- tor - 0.2.6.9
+- tor - 0.2.6.10
+License: Tor's License
+Cartridge-Version: '0.0.4'
+License-Url: https://gitweb.torproject.org/tor.git/plain/LICENSE
 Source-Url: https://github.com/xkollar/tor-openshift/archive/master.zip
-
+Categories:
+- embedded
+- tor
+Versions:
+- '0.2.4.26'
+- '0.2.4.27'
+- '0.2.5.11'
+- '0.2.5.12'
+- '0.2.6.9'
+- '0.2.6.10'
