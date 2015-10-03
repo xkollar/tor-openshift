@@ -25,4 +25,4 @@ Provides:
 - tor - 0.2.6.9
 - tor - 0.2.6.10
 License: Tor's License
-Cartridge-Version: '0.0.4'
+Cartridge-Version: '0.0.5'

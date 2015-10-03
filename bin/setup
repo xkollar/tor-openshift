@@ -4,7 +4,7 @@ source "${OPENSHIFT_TOR_DIR}usr/src/common.sh"
 
 set -eu
 
-declare version="0.2.5.10"
+declare version="0.2.6.10"
 declare progname=$( basename "${0}" )
 
 function usage() {
