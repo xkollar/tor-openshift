@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source "${OPENSHIFT_OCAML_CORE_DIR}usr/src/common.sh"
+source "${OPENSHIFT_TOR_DIR}usr/src/common.sh"
 
 declare pidfile="${OPENSHIFT_DATA_DIR}tor.pid"
 declare logfile="${OPENSHIFT_LOG_DIR}tor.log"
