@@ -12,8 +12,9 @@ function usage() {
 }
 
 function generate_privkey_and_hostname() {
-    local dir=$1
+    local dir="${1}"
     mkdir -p "${dir}"
+    chmod 700 "${dir}"
     local private_key="${dir}/private_key"
     if ! [ -f "${private_key}" ]; then
         openssl genrsa -out "${private_key}" 1024 &>/dev/null
